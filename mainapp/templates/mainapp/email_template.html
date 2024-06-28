@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartão de Mensagem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .email-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .email-body {
+            padding: 20px;
+        }
+        .email-body h1 {
+            color: #333333;
+        }
+        .email-body p {
+            color: #666666;
+            line-height: 1.5;
+        }
+        .email-footer {
+            background-color: #eeeeee;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #999999;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        .data-table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <h1>Cartão de Mensagem</h1>
+        </div>
+        <div class="email-body">
+            <h1>Olá, {{ name }}!</h1>
+            <p>Estamos muito felizes em enviar esta mensagem para você. Esperamos que você tenha um dia maravilhoso e cheio de realizações.</p>
+            <p>Se você tiver alguma dúvida ou precisar de assistência, não hesite em nos contatar.</p>
+            <a href="{{ url }}" class="button">Clique Aqui</a>
+            <h2>Dados dos Clientes</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>CODCLI</th>
+                        <th>CLIENTE</th>
+                        <th>TELENT</th>
+                        <th>TELCOB</th>
+                        <th>NUMNOTA</th>
+                        <th>VLTOTAL</th>
+                        <th>ESPECIE</th>
+                        <th>VALOR</th>
+                        <th>DTVENC</th>
+                        <th>CODBARRA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in dados.clientes %}
+                    <tr>
+                        <td>{{ cliente.CODCLI }}</td>
+                        <td>{{ cliente.CLIENTE }}</td>
+                        <td>{{ cliente.TELENT }}</td>
+                        <td>{{ cliente.TELCOB }}</td>
+                        <td>{{ cliente.NUMNOTA }}</td>
+                        <td>{{ cliente.VLTOTAL }}</td>
+                        <td>{{ cliente.ESPECIE }}</td>
+                        <td>{{ cliente.VALOR }}</td>
+                        <td>{{ cliente.DTVENC }}</td>
+                        <td>{{ cliente.CODBARRA }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="email-footer">
+            <p>Você está recebendo este e-mail porque se inscreveu no nosso site.</p>
+            <p>Se você não deseja mais receber e-mails nossos, por favor, <a href="#">clique aqui para cancelar a inscrição</a>.</p>
+        </div>
+    </div>
+</body>
+</html>

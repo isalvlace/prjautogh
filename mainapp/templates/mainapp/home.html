@@ -1,0 +1,57 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Home - Sistema de Automação{% endblock %}
+
+{% block content %}
+<div class="jumbotron mt-4">
+    <h1 class="display-4">Sorria infeliz!!!!</h1>
+    <p class="lead">Gerenciamento de automações do sistema.</p>
+    <hr class="my-4">
+    <p>Utilize as opções abaixo:</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Automação 1</a>
+    <a class="btn btn-secondary btn-lg" href="#" role="button">Automação 2</a>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Automação 1</h5>
+                <p class="card-text">Descrição breve da automação 1.</p>
+                <a href="#" class="btn btn-primary">Ir para Automação 1</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Automação 2</h5>
+                <p class="card-text">Descrição breve da automação 2.</p>
+                <a href="#" class="btn btn-primary">Ir para Automação 2</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Automação 3</h5>
+                <p class="card-text">Descrição breve da automação 3.</p>
+                <a href="#" class="btn btn-primary">Ir para Automação 3</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <a href="{% url 'populate_data' %}">Popular Sqlite</a>
+</div>
+
+<div class="row">
+    <form action="{% url 'send_email_message' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Enviar Email</button>
+    </form>
+</div>
+
+{% endblock %}
+
