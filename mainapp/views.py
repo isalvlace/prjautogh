@@ -6,6 +6,7 @@ from django.db import transaction, IntegrityError
 from django.core.mail import send_mail
 from django.http import JsonResponse
 import smtplib
+from django.db.models import Prefetch
 
 def home(request):
     return render(request, 'mainapp/home.html')
@@ -83,11 +84,14 @@ def send_email_message(request):
         return HttpResponse(f'Ocorreu um erro inesperado ao enviar o email: {str(e)}')
  
 def get_bills(request):
-    content_data = {
-        'content': 'Conteúdo dinâmico carregado!'
+    clients_with_bills = XYZKCLIENT.objects.prefetch_related(
+        Prefetch('xyzknfsaid_set', queryset=XYZKNFSAID.objects.all()),
+        Prefetch('xyzkprest_set', queryset=XYZKPREST.objects.all())
+    )
+
+    context = {
+        'clients_with_bills': clients_with_bills
     }
-
-    """ return JsonResponse(content_data) """
-
-    return render(request, 'mainapp/bills.html')
+    
+    return render(request, 'mainapp/bills.html', context)
 

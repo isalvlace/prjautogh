@@ -4,15 +4,99 @@
 
 {% block content %}
 
+<!-- <br/>
+<form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2 search-input" type="search" placeholder="CPF/CNPJ" aria-label="Pesquisar">
+    <button class="btn btn-outline-light my-2 my-sm-0 search-button" type="submit">
+        <i class="fas fa-search"></i>
+    </button>
+</form>
+<br/> -->
+
 <br/>
 <div class="container">
-    <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2 search-input" type="search" placeholder="CPF/CNPJ" aria-label="Pesquisar">
-        <button class="btn btn-outline-light my-2 my-sm-0 search-button" type="submit">
-            <i class="fas fa-search"></i>
-        </button>
-    </form>
+    <table id="billsTable" class="display">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Telefone Cobrança</th>
+                <th>Telefone Entrega</th>
+                <th>Email</th>
+                <th>Código de Barras</th>
+                <th>Nota Fiscal</th>
+                <th>Especie</th>
+                <th>Data de Fechamento da NF</th>
+                <th>Valor</th>
+                <th>Data de Vencimento</th>
+                <th>Data de Pagamento</th>
+                <th>Data de Fechamento</th>
+                <th>Código de Barras (Prest)</th>
+                <th>Número do Pedido</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients_with_bills %}
+                {% for nf in client.xyzknfsaid_set.all %}
+                    {% for prest in client.xyzkprest_set.all %}
+                        <tr>
+                            <td>{{ client.XYZKCLIENTE }}</td>
+                            <td>{{ client.XYZKTELCOB }}</td>
+                            <td>{{ client.XYZKTELENT }}</td>
+                            <td>{{ client.XYZKEMAIL }}</td>
+                            <td>{{ client.XYZKCODBARRA }}</td>
+                            <td>{{ nf.XYZKNUMNOTA }}</td>
+                            <td>{{ nf.XYZKESPECIE }}</td>
+                            <td>{{ nf.XYZKDTFECHA }}</td>
+                            <td>{{ prest.XYZKVALOR }}</td>
+                            <td>{{ prest.XYZKDTVENC }}</td>
+                            <td>{{ prest.XYZKDTPAG }}</td>
+                            <td>{{ prest.XYZKDTFECHA }}</td>
+                            <td>{{ prest.XYZKCODBARRA }}</td>
+                            <td>{{ prest.XYZKNUMPED }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('#billsTable').DataTable({
+            "language": {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "Pesquisar:",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                },
+                "select": {
+                    "rows": {
+                        "_": "Selecionado %d linhas",
+                        "0": "Nenhuma linha selecionada",
+                        "1": "Selecionado 1 linha"
+                    }
+                }
+            }
+        });
+    });
+</script>
+</script>
+
 {% endblock %}
- 
