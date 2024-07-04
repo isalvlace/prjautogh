@@ -133,3 +133,5 @@ cython_debug/
 Dockerfile
 docker-compose.yml
 .dockerignore
+
+*.sqbpro

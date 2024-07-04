@@ -4,6 +4,7 @@ from mainapp.models import XYZKCLIENT, XYZKNFSAID, XYZKPREST
 from django.http import HttpResponse
 from django.db import transaction, IntegrityError
 from django.core.mail import send_mail
+from django.http import JsonResponse
 import smtplib
 
 def home(request):
@@ -54,7 +55,7 @@ def populate_data(request):
 def send_email_message(request):
 
     try:
-        corpo_email = """
+        '''corpo_email = """
             <p>Parágrafo1</p>
             <p>Parágrafo2</p>
         """
@@ -72,10 +73,21 @@ def send_email_message(request):
 
         s.login(msg['From'], password)
         s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
-        print('Email enviado')
+        print('Email enviado')'''
 
-        return HttpResponse("<h1>Email enviado com sucesso!</h1>")
+                
+
+        return HttpResponse("<h1>Deu certo!</h1>")
 
     except Exception as e:
         return HttpResponse(f'Ocorreu um erro inesperado ao enviar o email: {str(e)}')
  
+def get_bills(request):
+    content_data = {
+        'content': 'Conteúdo dinâmico carregado!'
+    }
+
+    """ return JsonResponse(content_data) """
+
+    return render(request, 'mainapp/bills.html')
+
