@@ -6,6 +6,7 @@ var Controller = {
     toggleSidebar: function(event) {
         event.preventDefault();
         $('#sidebar').toggleClass('collapsed');
+        $('#main-content').toggleClass('collapsed');
     }
 };
 

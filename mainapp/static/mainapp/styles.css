@@ -1,6 +1,6 @@
 body {
     background-color: #f8f9fa;
-    padding-top: 56px;  
+    padding-top: 56px;
     overflow-x: hidden;
 }
 
@@ -55,11 +55,11 @@ body {
 
 #sidebar .nav-link {
     padding: 0.5rem 1rem;
-    margin-left: 20px;  
+    margin-left: 20px;
 }
 
 #submenufinan, #submenuro {
-    margin-left: 15px;  
+    margin-left: 15px;
 }
 
 #submenufinan a, #submenuro a {
@@ -70,52 +70,16 @@ body {
 
 #submenufinan a:hover, #submenuro a:hover {
     background-color: #495057;
-    margin-left: 25px;  
+    margin-left: 25px;
 }
 
 #main-content {
-    margin-left: 250px;  
     transition: all 0.3s;
-    width: calc(100% - 250px);  
+    margin-left: 0;
+    width: 100%;
 }
 
-#main-content.collapsed {
-    margin-left: 0;  
-    width: 100%;  
-}
-
-/* search box */
-.search-box {
-    margin-top: 20px;   
-}
-
-.search-input {
-    width: 300px;
-    padding: 10px 20px;
-    border: 2px solid #343a40;
-    border-radius: 25px;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.search-input:focus {
-    width: 350px;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.search-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-.search-button .fas {
-    font-size: 18px;
-    color: #343a40;
-    transition: all 0.3s ease;
-}
-
-.search-button:hover .fas {
-    color: #007bff;
+#sidebar:not(.collapsed) ~ #main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
 }
