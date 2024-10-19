@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    <a class="nav-link" href="{% url 'mainapp:home' %}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Sobre</a>
@@ -36,7 +36,7 @@
         <nav class="nav flex-column">
             <a class="nav-link" href="#submenufinan" data-toggle="collapse">Finanças</a>
             <div id="submenufinan" class="collapse">
-                <a class="nav-link pl-4" href="{% url 'get_bills' %}" id="get-bills">Boletos</a>
+                <a class="nav-link pl-4" href="{% url 'mainapp:get_bills' %}" id="get-bills">Boletos</a>
             </div>
             <a class="nav-link" href="#submenuro" data-toggle="collapse">Rotinas</a>
             <div id="submenuro" class="collapse">

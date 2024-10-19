@@ -6,6 +6,10 @@
 
 <br/>
 <div class="container">
+    
+    <button id="startAutomationBtn" class="btn btn-danger">Iniciar</button>
+    <hr>
+
     <table id="billsTable" class="display">
         <thead>
             <tr>
@@ -23,13 +27,14 @@
                 <th>Data de Fechamento</th>
                 <th>Código de Barras (Prest)</th>
                 <th>Número do Pedido</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             {% for client in clients_with_bills %}
                 {% for nf in client.xyzknfsaid_set.all %}
                     {% for prest in client.xyzkprest_set.all %}
-                        <tr>
+                        <tr id="row-{{ client.id }}">
                             <td>{{ client.XYZKCLIENTE }}</td>
                             <td>{{ client.XYZKTELCOB }}</td>
                             <td>{{ client.XYZKTELENT }}</td>
@@ -44,6 +49,9 @@
                             <td>{{ prest.XYZKDTFECHA }}</td>
                             <td>{{ prest.XYZKCODBARRA }}</td>
                             <td>{{ prest.XYZKNUMPED }}</td>
+                            <td>
+                                <button class="btn btn-primary seraclicado" onclick="sendClick(event, this)">Enviar</button>
+                            </td>
                         </tr>
                     {% endfor %}
                 {% endfor %}
@@ -87,7 +95,36 @@
             }
         });
     });
-</script>
+
+    
+    document.getElementById('startAutomationBtn').addEventListener('click', function() {
+        fetch("{% url 'mainapp:start_automation' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({}) // Se precisar passar dados
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao iniciar automação');
+            }
+            return response.json(); // Se precisar processar a resposta
+        })
+        .then(data => {
+            console.log(data);
+            // Aqui você pode adicionar lógica para manipular a UI, se necessário
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+    });
+
+    function sendClick(button) {
+        button.parentElement.parentElement.style.display = 'none'; // Oculte a linha da tabela
+        alert('Botão clicado e ocultado!');
+    }
 </script>
 
 {% endblock %}

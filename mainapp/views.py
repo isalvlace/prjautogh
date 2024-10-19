@@ -7,6 +7,13 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 import smtplib
 from django.db.models import Prefetch
+from auto.views import start_automation
+from django.core.cache import cache
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+import time
 
 def home(request):
     return render(request, 'mainapp/home.html')
@@ -84,14 +91,15 @@ def send_email_message(request):
         return HttpResponse(f'Ocorreu um erro inesperado ao enviar o email: {str(e)}')
  
 def get_bills(request):
+    cache.clear()
+    
     clients_with_bills = XYZKCLIENT.objects.prefetch_related(
         Prefetch('xyzknfsaid_set', queryset=XYZKNFSAID.objects.all()),
         Prefetch('xyzkprest_set', queryset=XYZKPREST.objects.all())
     )
-
+  
     context = {
         'clients_with_bills': clients_with_bills
     }
-    
-    return render(request, 'mainapp/bills.html', context)
 
+    return render(request, 'mainapp/bills.html', context)
