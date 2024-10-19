@@ -29,6 +29,7 @@ def execute_webdriver(chromedriver_path):
 def perform_automation(driver):
     try:
         driver.get("http://127.0.0.1:8080/mainapp/get_bills/")  
+        driver.maximize_window()
 
         buttons = WebDriverWait(driver, 10).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, "seraclicado"))
@@ -71,6 +72,7 @@ def perform_automation(driver):
 def start_automation(request):
     if request.method == "POST":
         chromedriver_path = os.path.join(os.path.dirname(__file__), os.pardir, 'chromedriver')
+
 
         driver = execute_webdriver(chromedriver_path)
         if isinstance(driver, JsonResponse):

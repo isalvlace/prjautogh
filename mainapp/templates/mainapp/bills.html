@@ -50,7 +50,7 @@
                             <td>{{ prest.XYZKCODBARRA }}</td>
                             <td>{{ prest.XYZKNUMPED }}</td>
                             <td>
-                                <button class="btn btn-primary seraclicado" onclick="sendClick(event, this)">Enviar</button>
+                                <button class="btn btn-primary seraclicado" onclick="testClick(event, this)">Enviar</button>
                             </td>
                         </tr>
                     {% endfor %}
@@ -104,27 +104,32 @@
                 'Content-Type': 'application/json',
                 'X-CSRFToken': '{{ csrf_token }}'
             },
-            body: JSON.stringify({}) // Se precisar passar dados
+            body: JSON.stringify({}) 
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro ao iniciar automação');
             }
-            return response.json(); // Se precisar processar a resposta
+            return response.json(); 
         })
         .then(data => {
             console.log(data);
-            // Aqui você pode adicionar lógica para manipular a UI, se necessário
+            
         })
         .catch(error => {
             console.error('Erro:', error);
         });
     });
 
-    function sendClick(button) {
-        button.parentElement.parentElement.style.display = 'none'; // Oculte a linha da tabela
-        alert('Botão clicado e ocultado!');
+    function testClick(event, button) {
+        event.preventDefault()
+        
+        const row = button.closest('tr')
+        
+        if (row) row.style.display = 'none'
+        else {}
     }
+
 </script>
 
 {% endblock %}
