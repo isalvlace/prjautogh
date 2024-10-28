@@ -6,7 +6,6 @@
 
 <br/>
 <div class="container">
-    
     <button id="startAutomationBtn" class="btn btn-danger">Iniciar</button>
     <hr>
 
@@ -95,7 +94,6 @@
             }
         });
     });
-
     
     document.getElementById('startAutomationBtn').addEventListener('click', function() {
         fetch("{% url 'mainapp:start_automation' %}", {
@@ -126,10 +124,12 @@
         
         const row = button.closest('tr')
         
-        if (row) row.style.display = 'none'
-        else {}
+        if (row) {
+            button.style.backgroundColor = '#DAA520'
+            
+            button.disabled = true
+        }
     }
-
 </script>
 
 {% endblock %}

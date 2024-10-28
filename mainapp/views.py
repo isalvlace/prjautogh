@@ -83,8 +83,6 @@ def send_email_message(request):
         s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
         print('Email enviado')'''
 
-                
-
         return HttpResponse("<h1>Deu certo!</h1>")
 
     except Exception as e:
